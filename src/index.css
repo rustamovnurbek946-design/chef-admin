@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --app-bg: #f3f4f6;
+    /* Default gray-100 */
+    --transition-speed: 0.5s;
+}
+
+.dark {
+    --app-bg: #111827;
+    /* Default gray-900 */
+}
+
+
+
+body {
+    background-color: var(--app-bg);
+    transition: background-color var(--transition-speed) ease;
+}
+
+.app-container {
+    background-color: var(--app-bg) !important;
+    transition: background-color var(--transition-speed) ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.animate-fadeIn {
+    animation: fadeIn 0.3s ease;
+}
+
+
+/* Shrift o'lchamlari uchun */
+:root {
+  font-size: 16px; /* default */
+  --animation-duration: 0.3s;
+}
+
+/* Barcha animatsiyalar uchun global sozlama */
+* {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+/* Shrift o'lchamlari uchun root variable */
+:root {
+  font-size: 16px; /* default */
+  --animation-duration: 0.3s;
+}
+
+/* Barcha elementlar uchun transition */
+* {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark mode da shrift */
+.dark {
+  color-scheme: dark;
+}
+
+/* Responsive shrift */
+@media (max-width: 768px) {
+  :root {
+    font-size: 14px;
+  }
+}
+
+/* Reduce motion - agar foydalanuvchi tez animatsiyani tanlasa */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
