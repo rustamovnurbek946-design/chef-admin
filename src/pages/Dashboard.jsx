@@ -50,11 +50,6 @@ export default function PremiumDashboard() {
   // States
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [currentTime, setCurrentTime] = useState(new Date());
-  const [pendingRecipes, setPendingRecipes] = useState([
-    { id: 1, name: "Shokoladli Tort", author: "Zarina", type: "Shirinlik" },
-    { id: 2, name: "Dietik Salatlar", author: "Rustam", type: "Foydali" },
-    { id: 3, name: "Qozon Kabob", author: "Sardor", type: "Milliy" },
-  ]);
 
   // Real-time soat
   useEffect(() => {
@@ -65,10 +60,6 @@ export default function PremiumDashboard() {
   const handleRefresh = () => {
     setIsRefreshing(true);
     setTimeout(() => setIsRefreshing(false), 1500);
-  };
-
-  const approveRecipe = (id) => {
-    setPendingRecipes(prev => prev.filter(recipe => recipe.id !== id));
   };
 
   // Animatsiya variantlari
@@ -263,45 +254,6 @@ export default function PremiumDashboard() {
                   <div className="flex items-center gap-3"><AlertTriangle size={18} /> {t("complaints")} (3)</div>
                   <ArrowUpRight size={16} />
                 </Link>
-              </div>
-            </motion.div>
-
-            {/* Tasdiqlashni kutayotganlar */}
-            <motion.div variants={itemVars} className="bg-white dark:bg-slate-800/80 p-8 rounded-[2.5rem] shadow-xl border border-slate-100 dark:border-slate-700/50">
-              <div className="flex items-center justify-between mb-6">
-                <h3 className="text-lg font-black dark:text-white flex items-center gap-2">
-                  <Clock className="text-amber-500" size={20} /> {t("pendingApproval")}
-                </h3>
-                <span className="bg-amber-100 dark:bg-amber-500/20 text-amber-600 dark:text-amber-400 text-xs font-black px-2.5 py-1 rounded-full">{pendingRecipes.length}</span>
-              </div>
-
-              <div className="space-y-3">
-                <AnimatePresence>
-                  {pendingRecipes.length > 0 ? pendingRecipes.map((recipe) => (
-                    <motion.div
-                      key={recipe.id}
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      exit={{ opacity: 0, x: -20, height: 0 }}
-                      className="flex justify-between items-center p-4 bg-slate-50 dark:bg-slate-900/50 rounded-2xl border border-slate-100 dark:border-slate-700/50"
-                    >
-                      <div>
-                        <p className="font-bold text-slate-800 dark:text-white text-sm">{recipe.name}</p>
-                        <p className="text-[10px] text-slate-500 uppercase font-bold mt-0.5">{t("author")}: {recipe.author}</p>
-                      </div>
-                      <div className="flex gap-2">
-                        <button onClick={() => approveRecipe(recipe.id)} className="p-2 text-emerald-500 hover:bg-emerald-500 hover:text-white bg-emerald-50 dark:bg-emerald-500/10 rounded-xl transition-all">
-                          <CheckCircle size={18} />
-                        </button>
-                        <button onClick={() => approveRecipe(recipe.id)} className="p-2 text-rose-500 hover:bg-rose-500 hover:text-white bg-rose-50 dark:bg-rose-500/10 rounded-xl transition-all">
-                          <XCircle size={18} />
-                        </button>
-                      </div>
-                    </motion.div>
-                  )) : (
-                    <p className="text-center text-sm font-bold text-slate-400 py-4">{t("noPendingRecipes")}</p>
-                  )}
-                </AnimatePresence>
               </div>
             </motion.div>
 
